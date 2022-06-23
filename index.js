@@ -35,7 +35,6 @@ app.use('/', usersController);
 app.get('/', (req, res) => {
     User.findAll({ raw: true,order:[['points','DESC']]}).then(users => {
         res.render('index', {users:users});
-        console.log(users)
     })
 })
 
@@ -61,15 +60,9 @@ function userAuth(req, res, next) {
 
 app.get('/:link', (req, res) =>{
     var link = req.params.link;
-    User.findOne({
-        where: {
-            link:link
-        }
-    }).then(link =>{
+    User.findOne({raw: true,where: {link:link}}).then(link =>{
         if(link != undefined){
-            User.findAll().then(link => {
                 res.render('signup', {link:link});
-            })
         }else{
             res.redirect('/');
         }
