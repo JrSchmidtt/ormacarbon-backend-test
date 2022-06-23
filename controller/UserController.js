@@ -15,7 +15,6 @@ router.post('/signup', (req, res) => {
         if (user == undefined) {
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(password, salt);
-
             User.create({
                 email,
                 name,
@@ -45,7 +44,7 @@ router.post('/login', (req, res) =>{
                     id: user.id,
                     email: user.email
                 }
-                res.redirect('/');
+                res.redirect('/profile');
             }else{
                 res.redirect('/login');
             }

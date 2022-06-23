@@ -7,13 +7,13 @@ const port = 3000
 
 app.use(session({
     secret: '!@&l#umsKIgqI$XLViBaF^8$FS#mlpNJ@@*SZ5pjRfArrfBDrQ',
-    cookie: {maxAge: 300000000},
+    cookie: { maxAge: 300000000 },
     resave: true,
     saveUninitialized: true
 }))
 
 // Body Parser
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // View Engine
@@ -29,22 +29,35 @@ const User = require('./models/User');
 const usersController = require('./controller/UserController')
 
 // Routers
-app.get('/', (req, res) =>{res.render('index');})
-app.use('/',usersController);
+app.get('/', (req, res) => { res.render('index'); })
+app.use('/', usersController);
 
-app.get('/signup', (req, res) =>{
+app.get('/signup', (req, res) => {
     res.render('signup');
 })
-app.get('/login', (req, res) =>{
+
+app.get('/login', (req, res) => {
     res.render('login');
 })
+
+app.get('/profile', userAuth, (req, res) => {
+    res.render('profile');
+})
+
+function userAuth(req, res, next) {
+    if (req.session.user != undefined) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
 // database MYSQL
 database
     .authenticate()
     .then(() => {
         console.log('Database connected!')
-    }).catch((error) =>{
+    }).catch((error) => {
         console.log(error);
     })
 
