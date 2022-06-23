@@ -1,8 +1,37 @@
 <%- include ('./partials/header.ejs'); %>
 <%- include ('./partials/navbar.ejs'); %>
 <body>
-    <div class="container">
-        <h1>Home Page</h1>
+    <div class="container"><br>
+        <h2>Home</h2><br>
+        <div class="card center text-center">
+            <div class="card-header">
+                Os 10 melhores serão os vencedores
+                <hr>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Pontos</th>
+                            <th>Nome</th>
+                            <th>Link Afiliado</th>
+                            <th>Posição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% rank = 1 %>
+                          <% users.forEach(user => { %>
+                            <tr>
+                                <th> <%= user.points %> </th>
+                                <th> <%= user.name %> </th>
+                                <th> <%= user.link %> </th>
+                                <th> <%= rank++ %> </th>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
     </div>
 </body>
 <%- include ('./partials/footer.ejs'); %>

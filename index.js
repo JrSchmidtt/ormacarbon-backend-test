@@ -33,7 +33,10 @@ const usersController = require('./controller/UserController')
 app.use('/', usersController);
 
 app.get('/', (req, res) => {
-    res.render('index'); 
+    User.findAll({ raw: true,order:[['points','DESC']]}).then(users => {
+        res.render('index', {users:users});
+        console.log(users)
+    })
 })
 
 app.get('/signup', (req, res) => {
