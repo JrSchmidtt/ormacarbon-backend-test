@@ -28,9 +28,13 @@ const User = require('./models/User');
 //Controllers
 const usersController = require('./controller/UserController')
 
+
 // Routers
-app.get('/', (req, res) => { res.render('index'); })
 app.use('/', usersController);
+
+app.get('/', (req, res) => {
+    res.render('index'); 
+})
 
 app.get('/signup', (req, res) => {
     res.render('signup');
@@ -51,6 +55,25 @@ function userAuth(req, res, next) {
         res.redirect('/login');
     }
 }
+
+app.get('/:link', (req, res) =>{
+    var link = req.params.link;
+    User.findOne({
+        where: {
+            link:link
+        }
+    }).then(link =>{
+        if(link != undefined){
+            User.findAll().then(link => {
+                res.render('signup', {link:link});
+            })
+        }else{
+            res.redirect('/');
+        }
+    }).catch(err =>{
+        res.redirect('/');
+    })
+})
 
 // database MYSQL
 database

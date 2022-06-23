@@ -1,10 +1,13 @@
 <%- include ('./partials/header.ejs'); %>
-
+<%- include ('./partials/navbar.ejs'); %>
     <body>
         <div class="container">
             <div class="card">
                 <div class="card-header text-center">
                     <h2>Create your account</h2>
+                    <% if (typeof link == 'object') { %>
+                        <p>Link de afilhado de : <%= link[0].dataValues.name %>  </p>
+                    <% } %>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="signup">
