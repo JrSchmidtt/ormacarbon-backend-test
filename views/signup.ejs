@@ -1,0 +1,31 @@
+<%- include ('./partials/header.ejs'); %>
+
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Create your account</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="signup">
+                        <div class="mb-2">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email"
+                                aria-describedby="emailHelpId" placeholder="yourbestemail@server.com"><br>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Your name"><br>
+                            <label for="Password">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="*******"><br>
+                            <label for="Password">Phone:</label>
+                            <input type="phone" class="form-control" name="phone" id="phone"
+                                placeholder="99 98765-4321">
+                            <small id="emailHelpId" class="form-text text-muted">Put the user's email and password
+                                correctly.</small>
+                        </div>
+                        <button type="submit" class="form-control btn btn-success">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <%- include ('./partials/footer.ejs'); %>
