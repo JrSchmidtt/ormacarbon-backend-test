@@ -1,19 +1,38 @@
 <%- include ('./partials/header.ejs'); %>
-<%- include ('./partials/navbar.ejs'); %>
+<%- include ('./partials/user-navbar.ejs'); %>
 <body>
     <div class="container"><br>
-        <h2>Home</h2><br>
+        <div class="right text-right">
+            <div class="right text-right a2a_kit a2a_kit_size_32 a2a_default_style" style="float: right;">
+                <a class="a2a_button_copy_link"></a>
+                <a class="a2a_button_google_gmail"></a>
+                <a class="a2a_button_email"></a>
+            </div>
+        </div>
+        <h2>CARBON COMPENSATION - SUPER COOL TEXT </h2>
+        <div class="card center text-center">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://i0.wp.com/www.thestartupfounder.com/wp-content/uploads/2022/03/Black-White-Soft-Cream-Minimalist-Aesthetic-Choose-What-You-Want-Burger-Size-Small-Medium-Large-Banner-Landscape-2022-03-08T154527.408.jpg" alt="First slide">
+                  </div>
+                </div>
+              </div>
+        </div><br>
+            <p>What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><br>
+            <p>Maecenas dapibus ut erat sed viverra. Phasellus urna mauris, vulputate quis ex non, posuere pulvinar turpis. Aenean imperdiet lacus purus, non dignissim purus hendrerit at. Nunc fringilla nec tellus et eleifend. In id nisl ut diam elementum vestibulum. Curabitur lacinia consequat libero sit amet porta. Maecenas ultrices elit sed diam consectetur, a molestie sapien porta. Phasellus at blandit urna. Proin tincidunt quam eget ex elementum, eget egestas augue lacinia. Ut bibendum urna felis, et interdum mi rutrum non.</p><br><br>
         <div class="card center text-center">
             <div class="card-header">
-                Os 10 melhores serão os vencedores
+                <h4>Share your affiliate link and earn points.</h4>
+                Only the Top Ten wins.
                 <hr>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Pontos</th>
-                            <th>Nome</th>
-                            <th>Link Afiliado</th>
-                            <th>Posição</th>
+                            <th>Points</th>
+                            <th>Name</th>
+                            <th>Affiliate Link</th>
+                            <th>Rank</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,8 +41,8 @@
                             <tr>
                                 <th> <%= user.points %> </th>
                                 <th> <%= user.name %> </th>
-                                <th> <%= user.link %> </th>
-                                <th> <%= rank++ %> </th>
+                                <th> <a href="<%= url %><%= user.link %>" target="_blank"><%= url %><%= user.link %></a></th>
+                                <th><% if (rank<11) { %>🎖<% } %> <%= rank++ %> </th>
                             </tr>
                         <% }) %>
                     </tbody>

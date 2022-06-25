@@ -49,6 +49,7 @@ router.post('/login', (req, res) =>{
             if(correct){
                 req.session.user = {
                     id: user.id,
+                    name: user.name,
                     email: user.email
                 }
                 res.redirect('/profile');

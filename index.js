@@ -28,13 +28,14 @@ const User = require('./models/User');
 //Controllers
 const usersController = require('./controller/UserController')
 
-
 // Routers
 app.use('/', usersController);
 
-app.get('/', (req, res) => {
+app.get('/',userAuth, (req, res) => {
+    var account = req.session.user.name;
+    var fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`
     User.findAll({ raw: true,order:[['points','DESC']]}).then(users => {
-        res.render('index', {users:users});
+        res.render('index', {users:users,url:fullUrl,account});
     })
 })
 
@@ -46,9 +47,11 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
-app.get('/profile', userAuth, (req, res) => {
-    res.render('profile');
-})
+app.get('/logout',(req,res)=>{
+    req.session.destroy(function (err) {
+      res.redirect('/');
+     });
+  })
 
 function userAuth(req, res, next) {
     if (req.session.user != undefined) {
