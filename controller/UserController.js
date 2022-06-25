@@ -11,9 +11,11 @@ router.post('/signup', (req, res) => {
     var password = req.body.password;
     var phone = req.body.phone;
     var affiliateID = req.body.affiliateID;
-    var link = slugify(req.body.name + '-' + Date.now(), { lower: true, strict: true, })
+    var link = slugify(req.body.name + '-' + Math.floor(Math.random()*(1000-500+1)+500), { lower: true, strict: true, })
+    console.log(link)
     User.findOne({ where: { email: email } }).then(user => {
         if (user == undefined) {
+
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(password, salt);
             if (affiliateID == undefined) {

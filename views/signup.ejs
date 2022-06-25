@@ -46,6 +46,9 @@
                   <div class="form-outline mb-4">
                     <input type="password" name="password" id="password" class="form-control" required placeholder="********"/>
                     <label class="form-label" for="form3Example4">Password</label>
+                    <% if (typeof link == 'object') { %>
+                      <input type="hidden" class="form-control" value="<%= link.id %>" name="affiliateID" id="affiliateID">
+                    <% } %>
                   </div>
                   <button type="submit" class="form-control btn btn-success">
                     Sign up
