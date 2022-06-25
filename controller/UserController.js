@@ -16,22 +16,22 @@ router.post('/signup', (req, res) => {
         if (user == undefined) {
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(password, salt);
-            if(affiliateID == undefined){
-                User.create({email,name,phone,link,points: 5,password: hash}).then(() => {
+            if (affiliateID == undefined) {
+                User.create({ email, name, phone, link, points: 5, password: hash }).then(() => {
                     res.redirect('/');
                 }).catch((err) => {
                     res.redirect('/');
                 })
-            }else{
-                User.create({email,name,phone,link,points: 5,password: hash}).then(() => {
+            } else {
+                User.create({ email, name, phone, link, points: 5, password: hash }).then(() => {
                     res.redirect('/');
                 }).catch((err) => {
                     res.redirect('/');
                 })
-                User.findOne({raw:true , where: { id: affiliateID } }).then(affiliate => {
-                    if(affiliate){
-                       var pointsUpdated = affiliate.points + 10
-                       User.update({points:pointsUpdated}, {where:{id:affiliate.id}})
+                User.findOne({ raw: true, where: { id: affiliateID } }).then(affiliate => {
+                    if (affiliate) {
+                        var pointsUpdated = affiliate.points + 10
+                        User.update({ points: pointsUpdated }, { where: { id: affiliate.id } })
                     }
                 })
             }
@@ -40,23 +40,23 @@ router.post('/signup', (req, res) => {
         }
     })
 });
-router.post('/login', (req, res) =>{
+router.post('/login', (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
-    User.findOne({where:{email: email}}).then(user =>{
-        if(user != undefined){ 
-            var correct = bcrypt.compareSync(password,user.password);
-            if(correct){
+    User.findOne({ where: { email: email } }).then(user => {
+        if (user != undefined) {
+            var correct = bcrypt.compareSync(password, user.password);
+            if (correct) {
                 req.session.user = {
                     id: user.id,
                     name: user.name,
                     email: user.email
                 }
                 res.redirect('/profile');
-            }else{
+            } else {
                 res.redirect('/login');
             }
-        }else{
+        } else {
             res.redirect('/login');
         }
     });

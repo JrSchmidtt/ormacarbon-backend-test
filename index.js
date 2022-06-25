@@ -1,13 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const database = require('./database/connection');
 const session = require('express-session');
-const port = 3000
+const port = process.env.PORT || 3000;
 
 app.use(session({
-    secret: '!@&l#umsKIgqI$XLViBaF^8$FS#mlpNJ@@*SZ5pjRfArrfBDrQ',
-    cookie: { maxAge: 300000000 },
+    secret: process.env.SESSION_SECREAT,
+    cookie: { maxAge: 300000 },
     resave: true,
     saveUninitialized: true
 }))
